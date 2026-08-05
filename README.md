@@ -8,7 +8,7 @@ F.R.Y.E. OS is an experimental Python runtime built around a simple idea: local 
 
 This public preview is here to see whether the architecture resonates with local-first developers, Windows power users, agent builders, and people interested in inspectable self-evolving software.
 
-The release is deliberately small and clean. It does **not** contain the World Clock, Golden Ascension, games, simulators, investor material, or unrelated research.
+The preview is deliberately small and clean. It does **not** contain the World Clock, Golden Ascension, games, simulators, investor material, or unrelated research.
 
 ## Core architecture
 
@@ -21,7 +21,7 @@ The release is deliberately small and clean. It does **not** contain the World C
 - **Swappable providers** — offline Echo plus OpenAI-compatible local endpoints using only the Python standard library.
 - **Loopback dashboard** — a local control panel served at `127.0.0.1:8765`.
 
-## Verified baseline
+## Verified clean baseline
 
 - Parent runtime v0.1.0: **8/8 tests passed**
 - Active descendant v0.1.1: **9/9 tests passed**
@@ -33,7 +33,11 @@ The release is deliberately small and clean. It does **not** contain the World C
 
 See [`INSTALL_VERIFICATION_REPORT.md`](INSTALL_VERIFICATION_REPORT.md) and [`SOURCE_PROVENANCE.md`](SOURCE_PROVENANCE.md) for the exact truth boundary.
 
-## Windows quick start
+## What is public right now
+
+This repository currently publishes the architecture, clean-core contract, verification evidence, Windows wrappers, immutable bootstrap, and clean-core verifier. The complete frozen runtime package has been prepared separately and will be attached as an official release after a native Windows verification pass.
+
+## Intended Windows workflow
 
 Requirements: Windows 10/11 and Python 3.10+.
 
@@ -49,12 +53,6 @@ Dashboard: `http://127.0.0.1:8765/`
 
 > Keep the dashboard on loopback. This preview is not designed to be exposed directly to a LAN or the public internet.
 
-## Full verification
-
-```powershell
-.\INSTALL_VERIFY_WINDOWS.ps1 -OpenBrowser -KeepDashboardRunning
-```
-
 ## Clean-core law
 
 `versions/FRYE_OS_v0.1.0` and `descendants/FRYE_OS_v0.1.1` are frozen baselines. New systems attach under:
@@ -66,20 +64,17 @@ optional/workspaces/<workspace-id>/
 
 —or arrive as a new descendant. No blind overwrite is permitted.
 
-## Download
-
-The complete frozen preview ZIP is published under [`releases/`](releases/).
-
 ## Status
 
-This is a **pre-1.0 experimental public preview** and a fresh reconstruction of the documented install-verified v0.1.1 lineage. It is not presented as a byte-for-byte recovery of an earlier unavailable archive.
+This is a **pre-1.0 experimental public architecture preview** and a fresh reconstruction of the documented install-verified v0.1.1 lineage. It is not presented as a byte-for-byte recovery of an earlier unavailable archive.
 
-## Feedback
+## Feedback wanted
 
 The most useful feedback is architectural:
 
 - Does the immutable-bootstrap + descendant model make sense?
 - Is a standard-library-only Windows runtime useful?
 - Which part would you test first: memory, Workshop, providers, rollback, or dashboard?
+- What would make you star, fork, or actually install it?
 
-Open an issue with what you tried, what broke, or what you would build on top of it.
+Open an issue with what you would test, what feels unclear, or what you would build on top of it.
