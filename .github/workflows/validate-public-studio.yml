@@ -1,0 +1,76 @@
+name: Validate Kevin Frye Unlimited Public Studio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout public studio
+        uses: actions/checkout@v4
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/app.js
+          node --check lab/lab.js
+
+      - name: Parse HTML
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+
+          class StrictEnoughParser(HTMLParser):
+              pass
+
+          for path in [Path('index.html'), Path('lab/index.html'), Path('404.html')]:
+              parser = StrictEnoughParser()
+              parser.feed(path.read_text(encoding='utf-8'))
+              parser.close()
+              print(f'parsed {path}')
+          PY
+
+      - name: Serve and smoke-test routes
+        run: |
+          python -m http.server 8765 >/tmp/frye-public-studio.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid' EXIT
+          sleep 1
+          curl --fail --silent --show-error http://127.0.0.1:8765/ | grep -q 'KEVIN FRYE UNLIMITED'
+          curl --fail --silent --show-error http://127.0.0.1:8765/lab/ | grep -q 'BOUNDARY SWEEP'
+
+      - name: Scan public files for obvious secrets
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          ignored = {'.git'}
+          patterns = {
+              'OpenAI-style key': re.compile(r'sk-[A-Za-z0-9_-]{20,}'),
+              'GitHub token': re.compile(r'gh[pousr]_[A-Za-z0-9]{20,}'),
+              'Private key block': re.compile(r'BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY'),
+          }
+          findings = []
+          for path in Path('.').rglob('*'):
+              if not path.is_file() or any(part in ignored for part in path.parts):
+                  continue
+              if path.stat().st_size > 1_000_000:
+                  continue
+              text = path.read_text(encoding='utf-8', errors='ignore')
+              for name, pattern in patterns.items():
+                  if pattern.search(text):
+                      findings.append(f'{name}: {path}')
+          if findings:
+              raise SystemExit('\n'.join(findings))
+          print('public secret scan passed')
+          PY
