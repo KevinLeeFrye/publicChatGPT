@@ -1,80 +1,65 @@
-# F.R.Y.E. OS — Clean Core Preview
+# KEVIN FRYE UNLIMITED
 
-**A local-first, zero-dependency personal operating layer for Windows.**
+### F.R.Y.E. Unlimited Studios · Public Landing Page and Experiment Yard
 
-F.R.Y.E. OS is an experimental Python runtime built around a simple idea: local memory and identity should survive software evolution, while code changes should be tested as new descendants instead of overwriting the last working system.
+> **The clockwork is the game. Time and memory are a deterministic consequence engine.**
 
-## Why this preview exists
+This public repository is the front door for Kevin Frye Unlimited. It hosts selected browser experiments, public proof cards, architecture previews, test reports, and release-ready descendants without exposing private engines, credentials, unreleased intellectual property, or studio records.
 
-This public preview is here to see whether the architecture resonates with local-first developers, Windows power users, agent builders, and people interested in inspectable self-evolving software.
+## Public site
 
-The preview is deliberately small and clean. It does **not** contain the World Clock, Golden Ascension, games, simulators, investor material, or unrelated research.
+The static site lives at the repository root and is designed for GitHub Pages.
 
-## Core architecture
+- [`index.html`](index.html) — studio landing page
+- [`lab/`](lab/) — browser-safe deterministic boundary console
+- [`PUBLIC_RELEASE_POLICY.md`](PUBLIC_RELEASE_POLICY.md) — public/private release boundary
 
-- **Stable root bootstrap** — `frye.py` stays outside versioned runtimes and launches the active descendant.
-- **Frozen parent lineage** — v0.1.0 remains preserved while v0.1.1 is the active verified descendant.
-- **Durable shared state** — Markdown memory and append-only JSONL ledgers live outside versioned code.
-- **Descendant evolution** — changes are cloned, tested, and promoted by an atomic active-pointer swap.
-- **Workshop staging** — external Python is copied, hashed, and syntax-checked before execution.
-- **Proportionate authority** — routine actions can run automatically; higher-consequence actions become explicit pending approvals.
-- **Swappable providers** — offline Echo plus OpenAI-compatible local endpoints using only the Python standard library.
-- **Loopback dashboard** — a local control panel served at `127.0.0.1:8765`.
+## Current public proof
 
-## Verified clean baseline
+**F.R.Y.E. Temporal Engine v0.1.0** completed a private GitHub Actions verification gate:
 
-- Parent runtime v0.1.0: **8/8 tests passed**
-- Active descendant v0.1.1: **9/9 tests passed**
-- Bootstrap self-check: **passed**
-- Dashboard status API: **passed**
-- Parent preservation: **passed**
-- Forbidden-content purity scan: **passed**
-- Third-party Python dependencies: **none**
+| Gate | Result |
+|---|---:|
+| .NET Release build | 0 warnings, 0 errors |
+| xUnit | 19 passed, 0 failed |
+| One-day ordered events | 197 |
+| Duplicate events | 0 |
+| Replay parity | Passed |
+| Static source validation | Passed |
 
-See [`INSTALL_VERIFICATION_REPORT.md`](INSTALL_VERIFICATION_REPORT.md) and [`SOURCE_PROVENANCE.md`](SOURCE_PROVENANCE.md) for the exact truth boundary.
-
-## What is public right now
-
-This repository currently publishes the architecture, clean-core contract, verification evidence, Windows wrappers, immutable bootstrap, and clean-core verifier. The complete frozen runtime package has been prepared separately and will be attached as an official release after a native Windows verification pass.
-
-## Intended Windows workflow
-
-Requirements: Windows 10/11 and Python 3.10+.
-
-```powershell
-Set-ExecutionPolicy -Scope Process Bypass
-.\setup.ps1 -CreateDesktopShortcut
-.\frye.ps1 selfcheck
-.\frye.ps1 status
-.\frye.ps1 serve --open-browser
-```
-
-Dashboard: `http://127.0.0.1:8765/`
-
-> Keep the dashboard on loopback. This preview is not designed to be exposed directly to a LAN or the public internet.
-
-## Clean-core law
-
-`versions/FRYE_OS_v0.1.0` and `descendants/FRYE_OS_v0.1.1` are frozen baselines. New systems attach under:
+Replay hash:
 
 ```text
-optional/capabilities/<capability-id>/
-optional/workspaces/<workspace-id>/
+a20242c18ddaa043cc0a61575f6b0b03d2ab24302394455887e5daf2108355a1
 ```
 
-—or arrive as a new descendant. No blind overwrite is permitted.
+Canonical day-edge order:
 
-## Status
+```text
+Gate9 → DayReset → QuadrantChanged → UnitChanged → PhaseChanged
+```
 
-This is a **pre-1.0 experimental public architecture preview** and a fresh reconstruction of the documented install-verified v0.1.1 lineage. It is not presented as a byte-for-byte recovery of an earlier unavailable archive.
+## What belongs here
 
-## Feedback wanted
+- Small public demonstrations
+- Testable source capsules
+- Proof summaries and reproducible evidence
+- Public issues and feedback
+- Release candidates explicitly prepared for public distribution
 
-The most useful feedback is architectural:
+The early clean-core F.R.Y.E. OS preview files remain in this repository as preserved lineage.
 
-- Does the immutable-bootstrap + descendant model make sense?
-- Is a standard-library-only Windows runtime useful?
-- Which part would you test first: memory, Workshop, providers, rollback, or dashboard?
-- What would make you star, fork, or actually install it?
+## What does not belong here
 
-Open an issue with what you would test, what feels unclear, or what you would build on top of it.
+Credentials, private repository dumps, personal data, unreleased full engines, legal or investor records, and unsupported verification claims stay out of the public yard.
+
+Read the full [`PUBLIC_RELEASE_POLICY.md`](PUBLIC_RELEASE_POLICY.md).
+
+## Founder
+
+**Kevin Lee Frye**  
+Founder and Creative Director, Kevin Frye Unlimited / F.R.Y.E. Unlimited Studios
+
+---
+
+**Something new grew.**
