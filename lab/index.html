@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07090b">
+  <title>Public Lab | Kevin Frye Unlimited</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body class="lab-page">
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="../"><span class="brand-mark" aria-hidden="true">F</span><span><strong>KEVIN FRYE UNLIMITED</strong><small>Public Determinism Lab</small></span></a>
+    <nav><a href="../">Home</a><a href="https://github.com/KevinLeeFrye/publicChatGPT/issues">Report a result</a></nav>
+  </header>
+
+  <main class="lab-shell">
+    <section class="lab-hero">
+      <div><p class="eyebrow">BAY 01 // BOUNDARY SWEEP</p><h1>Public<br><span>Lab.</span></h1></div>
+      <p>This console demonstrates the F.R.Y.E. ordering contract in a small browser-safe model. It is not the private engine source. Advance through the day and watch simultaneous events resolve by canonical priority.</p>
+    </section>
+
+    <section class="console-layout">
+      <aside class="control-panel">
+        <p class="eyebrow">MOVEMENT CONTROLS</p>
+        <label for="stepSize">Advance size: <strong id="stepLabel">600 seconds</strong></label>
+        <input id="stepSize" type="range" min="600" max="21600" step="600" value="600">
+        <div class="metric-pair">
+          <div class="metric"><span>SESSION SECOND</span><strong id="sessionValue">0</strong></div>
+          <div class="metric"><span>PROJECTED SECOND</span><strong id="projectedValue">0</strong></div>
+          <div class="metric"><span>UNIT</span><strong id="unitValue">1</strong></div>
+          <div class="metric"><span>PHASE</span><strong id="phaseValue">SPARK</strong></div>
+        </div>
+        <div class="console-actions"><button class="primary" id="advanceButton">Advance movement</button><button id="dayButton">Jump to day edge</button><button id="resetButton">Reset</button></div>
+        <p class="lab-note">Sweep interval: (T_from, T_to]. Same-tick order: Gate → Day Reset → Quadrant → Unit → Phase.</p>
+      </aside>
+      <section class="console-panel" aria-live="polite">
+        <div class="console-head"><span>EVENT STREAM</span><span id="eventCount">0 EVENTS</span></div>
+        <div class="console-log" id="consoleLog"></div>
+      </section>
+    </section>
+  </main>
+  <script src="lab.js"></script>
+</body>
+</html>
