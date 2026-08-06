@@ -1,8 +1,6 @@
 name: Deploy Kevin Frye Unlimited Pages
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -23,10 +21,8 @@ jobs:
     steps:
       - name: Checkout public studio
         uses: actions/checkout@v4
-      - name: Configure and enable Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - name: Upload static site
         uses: actions/upload-pages-artifact@v3
         with:
