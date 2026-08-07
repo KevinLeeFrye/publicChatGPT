@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Public Lab Bay 03: deterministic causal memory and faction grudge dial by Kevin Frye Unlimited.">
+  <meta name="theme-color" content="#08090b">
+  <title>Bay 03 · Causal Memory | Kevin Frye Unlimited</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <link rel="stylesheet" href="causal-memory.css">
+</head>
+<body class="causal-page">
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">F</span><span><strong>KEVIN FRYE UNLIMITED</strong><small>Public Causal Memory Lab</small></span></a>
+    <nav aria-label="Public lab navigation">
+      <a href="../bay-02/">Bay 02</a>
+      <a href="../">Bay 01</a>
+      <a href="../../">Home</a>
+      <a href="https://github.com/KevinLeeFrye/publicChatGPT/issues">Report</a>
+    </nav>
+  </header>
+
+  <main class="causal-shell">
+    <section class="causal-hero">
+      <div>
+        <p class="eyebrow">BAY 03 // CAUSAL MEMORY</p>
+        <h1>Memory has<br><span>teeth.</span></h1>
+      </div>
+      <div class="hero-description">
+        <p>Session time keeps the permanent causal record. Projected time paints the environment. Pressure changes how slowly grudges decay, but never rewrites what happened.</p>
+        <div class="hero-actions">
+          <button class="button primary" id="flipDialButton" type="button">Reveal backside causal dial</button>
+          <button class="button ghost" id="downloadButton" type="button">Download diagnostic JSON</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="causal-layout">
+      <div class="dial-column">
+        <div class="dial-card" id="dialCard">
+          <div class="dial-face dial-front" aria-label="Projected environmental dial">
+            <div class="front-orbit orbit-outer"></div>
+            <div class="front-orbit orbit-inner"></div>
+            <div class="quadrant-marks" aria-hidden="true"><span>DAWN</span><span>DAY</span><span>DUSK</span><span>NIGHT</span></div>
+            <div class="environment-core">
+              <small>PROJECTED ENVIRONMENT</small>
+              <strong id="environmentName">MISTED DAWN</strong>
+              <span id="environmentNote">Soft visibility and cautious approach.</span>
+            </div>
+            <div class="dial-hand session-hand" id="sessionHand"><i>SESSION</i></div>
+            <div class="dial-hand projected-hand" id="projectedHand"><i>PROJECTED</i></div>
+            <div class="center-jewel"></div>
+            <div class="front-readout">
+              <span id="sessionClock">0000:00</span>
+              <span id="projectedClock">0000:00</span>
+            </div>
+          </div>
+
+          <div class="dial-face dial-back" aria-label="Backside causal grudge dial">
+            <div class="hostility-ring">
+              <span class="band-label idle">IDLE</span>
+              <span class="band-label suspicious">SUSPICIOUS</span>
+              <span class="band-label hostile">HOSTILE</span>
+              <span class="band-label war">OPEN WAR</span>
+            </div>
+            <div class="memory-spring"></div>
+            <div class="grudge-needle" id="grudgeNeedle"><span></span></div>
+            <div class="center-jewel causal-jewel"></div>
+            <div class="causal-readout">
+              <small>ACTIVE FACTION</small>
+              <strong id="activeFactionName">Brass Accord</strong>
+              <span id="activeGrudge">0.720000</span>
+              <b id="activeBand">HOSTILE</b>
+            </div>
+            <div class="pressure-halo" id="pressureHalo"></div>
+          </div>
+        </div>
+
+        <div class="dial-caption">
+          <span id="dialSideLabel">FRONT // PROJECTED PRESENTATION</span>
+          <button type="button" id="flipSmallButton">Flip movement</button>
+        </div>
+
+        <section class="proof-card">
+          <p class="eyebrow">PUBLIC PROOF</p>
+          <div class="proof-grid">
+            <div><span>TESTED EVENTS</span><strong id="proofEvents">7</strong></div>
+            <div><span>DUPLICATES</span><strong id="proofDuplicates">0</strong></div>
+            <div><span>REPLAY</span><strong id="proofReplay">MATCH</strong></div>
+            <div><span>FINGERPRINT</span><code id="proofFingerprint">2daf2e9741936139</code></div>
+          </div>
+        </section>
+      </div>
+
+      <div class="instrument-column">
+        <section class="instrument-panel controls-panel">
+          <div class="panel-heading"><div><p class="eyebrow">TIME AUTHORITY</p><h2>Advance the consequence engine.</h2></div><span class="status-lamp" id="statusLamp">READY</span></div>
+
+          <div class="clock-grid">
+            <article><span>SESSION MINUTE</span><strong id="sessionMinute">0.000</strong><small>Monotonic · never rewinds</small></article>
+            <article><span>PROJECTED MINUTE</span><strong id="projectedMinute">0.000</strong><small id="projectionModeLabel">Following Session</small></article>
+            <article><span>PRESSURE</span><strong id="pressureValue">0.35</strong><small id="pressureBand">CYAN</small></article>
+            <article><span>ENVIRONMENT</span><strong id="environmentQuadrant">DAWN</strong><small id="environmentExposure">LOW exposure</small></article>
+          </div>
+
+          <div class="control-row">
+            <label>Session advance
+              <select id="advanceSize">
+                <option value="60">60 minutes</option>
+                <option value="240" selected>240 minutes</option>
+                <option value="720">720 minutes</option>
+                <option value="1440">1,440 minutes</option>
+              </select>
+            </label>
+            <label>Projected behavior
+              <select id="projectionMode">
+                <option value="follow">Follow Session</option>
+                <option value="freeze">Freeze Projected</option>
+              </select>
+            </label>
+          </div>
+          <div class="action-row">
+            <button class="primary-action" id="advanceButton" type="button">Advance movement</button>
+            <button id="advanceProjectedButton" type="button">Projected +360</button>
+            <button id="resetButton" type="button">Reset</button>
+          </div>
+
+          <div class="pressure-control">
+            <div><label for="pressureSlider">Systemic pressure</label><span id="pressurePending">0.35</span></div>
+            <input id="pressureSlider" type="range" min="0" max="1" step="0.01" value="0.35">
+            <button id="applyPressureButton" type="button">Apply pressure at current Session minute</button>
+          </div>
+        </section>
+
+        <section class="instrument-panel faction-panel">
+          <div class="panel-heading"><div><p class="eyebrow">FACTION MEMORY</p><h2>Analytical grudges.</h2></div><span>G(t) = (G₀ − F) · 0.5^(S/H) + F</span></div>
+          <div class="faction-grid" id="factionGrid"></div>
+          <div class="incident-console">
+            <label for="factionSelect">Target faction</label>
+            <select id="factionSelect"></select>
+            <div class="incident-buttons">
+              <button data-amount="0.08" data-label="Public slight" type="button">Slight +0.08</button>
+              <button data-amount="0.25" data-label="Broken agreement" type="button">Breach +0.25</button>
+              <button data-amount="0.55" data-label="Major betrayal" type="button">Betrayal +0.55</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="instrument-panel snapshot-panel">
+          <div class="panel-heading"><div><p class="eyebrow">SAVE / REHYDRATE</p><h2>Memory survives the handoff.</h2></div><code id="snapshotFingerprint">NO SNAPSHOT</code></div>
+          <p>The save slot captures both clocks, analytical anchors, pressure, stable sequence, factions, and public event history. Rehydrate restores the exact state without replaying old transitions.</p>
+          <div class="action-row">
+            <button class="primary-action" id="saveButton" type="button">Save snapshot</button>
+            <button id="restoreButton" type="button" disabled>Rehydrate snapshot</button>
+            <button id="parityButton" type="button">Run save/load parity demo</button>
+          </div>
+          <div class="parity-result" id="parityResult">No parity demonstration run yet.</div>
+        </section>
+      </div>
+    </section>
+
+    <section class="event-section">
+      <div class="event-heading">
+        <div><p class="eyebrow">DETERMINISTIC EVENT ORDER</p><h2>Causal ledger.</h2></div>
+        <div class="event-tools">
+          <select id="eventFilter" aria-label="Filter event stream">
+            <option value="all">All events</option>
+            <option value="HostilityBandChanged">Hostility edges</option>
+            <option value="MemoryIncident">Incidents</option>
+            <option value="PressureChanged">Pressure</option>
+            <option value="ProjectedEnvironmentChanged">Environment</option>
+          </select>
+          <span id="eventCount">0 EVENTS</span>
+        </div>
+      </div>
+      <div class="event-ledger" id="eventLedger" aria-live="polite"></div>
+      <p class="ordering-note">Stable comparison tuple: scheduled Session minute → priority → faction order → local order → sequence. Hostility changes fire only when a band edge is crossed.</p>
+    </section>
+  </main>
+
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
