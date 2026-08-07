@@ -24,9 +24,14 @@ jobs:
           node --check lab/lab.js
           node --check lab/bay-02/model.mjs
           node --check lab/bay-02/app.mjs
+          node --check lab/bay-03/model.mjs
+          node --check lab/bay-03/app.mjs
 
       - name: Run deterministic BioClock tests
         run: node --test tests/bioclock-model.test.mjs
+
+      - name: Run deterministic causal-memory tests
+        run: node --test tests/causal-memory-model.test.mjs
 
       - name: Parse HTML
         run: |
@@ -41,6 +46,7 @@ jobs:
               Path('index.html'),
               Path('lab/index.html'),
               Path('lab/bay-02/index.html'),
+              Path('lab/bay-03/index.html'),
               Path('404.html'),
           ]
           for path in paths:
@@ -60,6 +66,8 @@ jobs:
           curl --fail --silent --show-error http://127.0.0.1:8765/lab/ | grep -q 'BOUNDARY SWEEP'
           curl --fail --silent --show-error http://127.0.0.1:8765/lab/bay-02/ | grep -q '369 BIOCLOCK'
           curl --fail --silent --show-error http://127.0.0.1:8765/lab/bay-02/model.mjs | grep -q 'DAY_MINUTES: 1440'
+          curl --fail --silent --show-error http://127.0.0.1:8765/lab/bay-03/ | grep -q 'CAUSAL MEMORY'
+          curl --fail --silent --show-error http://127.0.0.1:8765/lab/bay-03/model.mjs | grep -q 'KFU.PublicCausalMemory.v1'
 
       - name: Scan public files for obvious secrets
         run: |
