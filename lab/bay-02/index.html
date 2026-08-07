@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive public 369 BioClock visualization from Kevin Frye Unlimited and F.R.Y.E. Unlimited Studios.">
+  <meta name="theme-color" content="#07090b">
+  <title>369 BioClock | Public Lab Bay 02</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/styles.css">
+  <link rel="stylesheet" href="bioclock.css">
+</head>
+<body class="bio-page">
+  <div class="page-noise" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="../../" aria-label="Kevin Frye Unlimited home">
+      <span class="brand-mark" aria-hidden="true">F</span>
+      <span><strong>KEVIN FRYE UNLIMITED</strong><small>Public Lab · Bay 02</small></span>
+    </a>
+    <nav aria-label="BioClock navigation">
+      <a href="../">Bay 01</a>
+      <a href="../../">Studio</a>
+      <a href="https://github.com/KevinLeeFrye/publicChatGPT/issues">Report</a>
+    </nav>
+  </header>
+
+  <main class="bio-shell">
+    <section class="bio-hero">
+      <div>
+        <p class="eyebrow">PUBLIC LAB BAY 02 // 369 BIOCLOCK</p>
+        <h1>Time has<br><span>living geometry.</span></h1>
+      </div>
+      <div class="bio-intro">
+        <p>An interactive browser-safe visualization of the exact 1,440-minute day: 36 Units, four ten-minute phases, four Quadrants, twelve Fields, six elemental Petals, and all 3/6/9 Gates.</p>
+        <p class="privacy-note">Public model only. It contains no private engine source, credentials, private Drive records, or unreleased studio assets.</p>
+      </div>
+    </section>
+
+    <section class="bio-grid">
+      <article class="dial-card">
+        <div class="card-head">
+          <span>369 BIOCLOCK MOVEMENT</span>
+          <span id="statusText">PAUSED · Projected time follows Session time.</span>
+        </div>
+        <div class="dial-wrap">
+          <svg class="bio-dial" viewBox="0 0 400 400" role="img" aria-labelledby="dialTitle dialDescription">
+            <title id="dialTitle">F.R.Y.E. 369 BioClock</title>
+            <desc id="dialDescription">A circular 24-hour dial with 36 units, twelve fields, six petals, Session and Projected hands, and pressure ring.</desc>
+            <defs>
+              <radialGradient id="dialFace" cx="48%" cy="42%" r="62%">
+                <stop offset="0%" stop-color="#1c2d31"/>
+                <stop offset="42%" stop-color="#10191c"/>
+                <stop offset="100%" stop-color="#07090b"/>
+              </radialGradient>
+              <filter id="softGlow" x="-70%" y="-70%" width="240%" height="240%">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <circle cx="200" cy="200" r="194" class="case-ring"/>
+            <circle cx="200" cy="200" r="184" class="pressure-glow" id="pressureGlow"/>
+            <circle cx="200" cy="200" r="184" class="pressure-track"/>
+            <circle cx="200" cy="200" r="184" class="pressure-fill" id="pressureFill" transform="rotate(-90 200 200)"/>
+            <circle cx="200" cy="200" r="174" fill="url(#dialFace)" class="dial-face"/>
+            <circle cx="200" cy="200" r="151" class="field-ring"/>
+            <circle cx="200" cy="200" r="78" class="core-ring"/>
+            <g id="unitTicks"></g>
+            <g id="fieldTicks"></g>
+            <g id="petalLabels"></g>
+            <g class="gate-labels" aria-hidden="true">
+              <text x="200" y="34">9</text>
+              <text x="356" y="205">3</text>
+              <text x="200" y="374">6</text>
+              <text x="44" y="205">9</text>
+            </g>
+            <line x1="200" y1="200" x2="200" y2="58" class="dial-hand session" id="sessionHand"/>
+            <line x1="200" y1="200" x2="200" y2="78" class="dial-hand projected" id="projectedHand"/>
+            <line x1="200" y1="200" x2="200" y2="114" class="dial-hand unit" id="unitHand"/>
+            <circle cx="200" cy="200" r="12" class="dial-pin"/>
+            <circle cx="200" cy="200" r="4" class="dial-jewel"/>
+            <text x="200" y="188" class="dial-kicker">PROJECTED</text>
+            <text x="200" y="215" class="dial-time" id="dialMinute">00:00:00</text>
+            <text x="200" y="232" class="dial-sub">1,440 MINUTE DAY</text>
+          </svg>
+        </div>
+        <div class="phase-track" id="phaseTrack" aria-label="Four ten-minute phases">
+          <div class="phase-cell active"><span>00–10</span><strong>SPARK</strong><small>ENTRY</small></div>
+          <div class="phase-cell"><span>10–20</span><strong>SURGE</strong><small>BUILD</small></div>
+          <div class="phase-cell"><span>20–30</span><strong>CREST</strong><small>PEAK</small></div>
+          <div class="phase-cell"><span>30–40</span><strong>RELEASE</strong><small>RELEASE</small></div>
+        </div>
+      </article>
+
+      <aside class="bio-side">
+        <section class="control-card">
+          <div class="card-head"><span>MOVEMENT CONTROLS</span><span>SESSION IS MONOTONIC</span></div>
+          <div class="control-body">
+            <div class="control-row primary-controls">
+              <button id="runButton" class="bio-button primary">Run movement</button>
+              <button id="resetButton" class="bio-button">Reset</button>
+              <button id="downloadButton" class="bio-button">Download diagnostic JSON</button>
+            </div>
+            <div class="control-pair">
+              <label>Speed
+                <select id="speedSelect">
+                  <option value="1">1 virtual minute / second</option>
+                  <option value="10" selected>10 virtual minutes / second</option>
+                  <option value="40">40 virtual minutes / second</option>
+                  <option value="120">120 virtual minutes / second</option>
+                  <option value="600">600 virtual minutes / second</option>
+                </select>
+              </label>
+              <label>Projected mode
+                <select id="projectionMode">
+                  <option value="follow">Follow Session</option>
+                  <option value="freeze">Freeze Projected</option>
+                  <option value="release-loop">Loop Release Ten</option>
+                </select>
+              </label>
+            </div>
+            <div class="step-grid" aria-label="Manual time steps">
+              <button data-step="1">+1 min</button>
+              <button data-step="10">+10 phase</button>
+              <button data-step="40">+40 unit</button>
+              <button data-step="120">+120 field</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="BioClock state">
+          <div class="bio-metric wide"><span>SESSION TIME</span><strong id="sessionMinute">00:00:00</strong><small id="sessionDay">DAY 1 · 0.00 TOTAL MIN</small></div>
+          <div class="bio-metric wide"><span>PROJECTED TIME</span><strong id="projectedMinute">00:00:00</strong><small>DRIFT <b id="driftValue">0.00 MIN</b></small></div>
+          <div class="bio-metric"><span>UNIT / 36</span><strong id="unitValue">01</strong></div>
+          <div class="bio-metric"><span>PHASE</span><strong id="phaseValue">SPARK</strong><small id="phaseAlias">ENTRY</small></div>
+          <div class="bio-metric"><span>QUADRANT / 4</span><strong id="quadrantValue">1 · DAWN</strong></div>
+          <div class="bio-metric"><span>FIELD / 12</span><strong id="fieldValue">1 · ARIES</strong></div>
+          <div class="bio-metric"><span>PETAL / 6</span><strong id="petalValue">1 · EARTH</strong></div>
+          <div class="bio-metric"><span>NEXT 3/6/9 GATE</span><strong id="gateValue">GATE 3</strong><small id="gateCountdown">120.00 MIN</small></div>
+          <div class="bio-metric pressure-metric wide"><span>SYSTEMIC PRESSURE</span><strong id="pressureValue">18%</strong><small id="pressureBand">CYAN</small></div>
+        </section>
+      </aside>
+    </section>
+
+    <section class="stream-card">
+      <div class="card-head stream-head">
+        <span>LIVE DETERMINISTIC EVENT STREAM</span>
+        <div>
+          <select id="eventFilter" aria-label="Filter event stream">
+            <option value="ALL">All clocks</option>
+            <option value="PROJECTED" selected>Projected</option>
+            <option value="SESSION">Session</option>
+            <option value="CONTROL">Control</option>
+            <option value="GATES">3/6/9 Gates</option>
+          </select>
+          <span id="eventCount">0 TOTAL</span>
+        </div>
+      </div>
+      <div class="bio-event-log" id="eventLog" aria-live="polite"></div>
+      <div class="stream-legend">
+        <span><i class="legend-dot projected"></i>Projected</span>
+        <span><i class="legend-dot session"></i>Session</span>
+        <span><i class="legend-dot gate"></i>3/6/9 Gate</span>
+        <span><i class="legend-dot pressure"></i>Pressure state</span>
+      </div>
+    </section>
+
+    <section class="proof-card">
+      <div><p class="eyebrow">BUILT-IN ONE-DAY PROOF</p><h2>Every tooth counted.</h2></div>
+      <div>
+        <p>The public model independently sweeps a complete day and compares a direct jump with irregular stepped advancement. It expects 144 phase changes, 36 unit changes, 12 field changes, six petal changes, four quadrant changes, four of each Gate, one Day Reset, and zero duplicate identities.</p>
+        <code id="proofText">Preparing deterministic proof…</code>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>Public Lab Bay 02 · 369 BioClock</span><span>Build openly. Release intentionally. Verify before claiming.</span></footer>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
