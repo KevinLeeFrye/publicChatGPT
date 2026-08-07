@@ -13,7 +13,25 @@ The static site lives at the repository root and is designed for GitHub Pages.
 - [`index.html`](index.html) — studio landing page
 - [`lab/`](lab/) — Public Lab Bay 01 deterministic boundary console
 - [`lab/bay-02/`](lab/bay-02/) — interactive 369 BioClock visualization
+- [`lab/bay-03/`](lab/bay-03/) — causal memory and faction grudge dial
 - [`PUBLIC_RELEASE_POLICY.md`](PUBLIC_RELEASE_POLICY.md) — public/private release boundary
+
+## Public Lab Bay 03 · Causal Memory
+
+Bay 03 demonstrates permanent causal memory without exposing private engine source:
+
+- monotonic Session time for analytical grudge decay;
+- Projected time for environmental presentation;
+- Idle, Suspicious, Hostile, and Open War bands;
+- pressure-modulated effective half-life;
+- edge-triggered upward and downward hostility transitions;
+- deterministic event ordering across simultaneous faction edges;
+- exact save-and-rehydrate state restoration;
+- uninterrupted versus restored replay parity;
+- a visible flippable backside causal dial;
+- downloadable diagnostic JSON.
+
+The public proof runs a 2,880-minute Session interval against a 1,440-minute Projected interval. Direct and irregular stepped replay produce the same event stream fingerprint: `2daf2e9741936139`, with seven ordered proof events and zero duplicate identities.
 
 ## Public Lab Bay 02 · 369 BioClock
 
@@ -69,6 +87,7 @@ Every push and pull request to `main` runs:
 
 - JavaScript and module syntax checks
 - deterministic BioClock Node tests
+- deterministic causal-memory, replay, and save/load tests
 - HTML parsing
 - static route smoke tests
 - obvious-secret scanning
